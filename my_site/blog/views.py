@@ -25,7 +25,7 @@ all_posts = [
         """
     },
     {
-        "slug": "hike-in-the-mountains",
+        "slug": "swimming-in-the-sea",
         "image": "Fitz - Morning Routine.png",
         "author": "Dd me",
         "date": date(2020, 5, 19),
@@ -46,7 +46,7 @@ all_posts = [
         """
     },
     {
-        "slug": "hike-in-the-mountains",
+        "slug": "walking-in-the-forest",
         "image": "People of Brooklyn - Nature.png",
         "author": "Ddd me",
         "date": date(2012, 2, 22),
@@ -82,8 +82,9 @@ def starting_page(request):
 
 
 def posts(request):
-    return render(request, "blog/all-posts.html")
+    return render(request, "blog/all-posts.html", { "all_posts": all_posts })
 
 
 def post_detail(request, slug):
-    return render(request, "blog/post-detail.html")
+    identified_post = next(post for post in all_posts if post["slug"] == slug)
+    return render(request, "blog/post-detail.html", {"post": identified_post})

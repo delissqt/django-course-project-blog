@@ -18,12 +18,15 @@ My Blog
   </header>
   <p>Hi, I am Max and I love to blog about tech and the world!</p>
 </section>
+<main><nav><a href="{% url "posts-page" %}" >All post</a></nav></main>
 
 <section id="latest-posts">
   <h2>My Latest Thoughts</h2>
 
   <ul>
-   {% include "blog/includes/post.html" %}
+    {% for post in posts %}
+      {% include "blog/includes/post.html" %}
+    {% endfor %}
   </ul>
 </section>
 

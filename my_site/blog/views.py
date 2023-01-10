@@ -2,14 +2,14 @@ from django.shortcuts import render
 
 from datetime import date
 
-posts = [
+all_posts = [
     {
         "slug": "hike-in-the-mountains",
-        "image": "People of Brooklyn - Nature.png",
+        "image": "Beep Beep - Mountains.png",
         "author": "D me",
         "date": date(2021, 7, 21),
         "title": "Mountain Hiking",
-        "excerpt": ".............some text some text some text ", 
+        "excerpt": ".. only text .. only text .. only text .. only text .. only text...", 
         "content": """
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -26,10 +26,10 @@ posts = [
     },
     {
         "slug": "hike-in-the-mountains",
-        "image": "People of Brooklyn - Nature.png",
+        "image": "Fitz - Morning Routine.png",
         "author": "Dd me",
         "date": date(2020, 5, 19),
-        "title": "Mountain Hiking",
+        "title": "Sea Swimming",
         "excerpt": ".............some text some text some text ", 
         "content": """
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
@@ -50,8 +50,8 @@ posts = [
         "image": "People of Brooklyn - Nature.png",
         "author": "Ddd me",
         "date": date(2012, 2, 22),
-        "title": "Mountain Hiking",
-        "excerpt": ".............some text some text some text ", 
+        "title": "Forest walking",
+        "excerpt": ",,,,,,some text some,,,,,,,,,,  ", 
         "content": """
         Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -68,10 +68,17 @@ posts = [
     },
 ]
 
+#temparally function for dummmy data
+def get_date(post):
+    return post["date"]
+    
+
 # Create your views here.
 
 def starting_page(request):
-    return render(request, "blog/index.html")
+    sorted_posts = sorted(all_posts, key=get_date)
+    latest_posts = sorted_posts[-3:]
+    return render(request, "blog/index.html", { "posts": latest_posts })
 
 
 def posts(request):

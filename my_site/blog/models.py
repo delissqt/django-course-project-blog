@@ -1,7 +1,6 @@
 from django.db import models
 
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils.text import slugify
 
 # Create your models here.
 
@@ -22,11 +21,5 @@ class Post(models.Model):
     date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True, db_index=True)
     content = models.TextField(validators=[MinValueValidator(50), MaxValueValidator(500)])
-    author = models.ForeignKey(Author, on_delete=models.SET_NULL, related_name="posts")
-    
-    tag = models.ManyToManyField(Tag, null=False)
-
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super().save(*args, **kwargs)
+    author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name="posts")
+    tag = models.ManyToManyField(Tag)

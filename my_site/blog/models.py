@@ -32,3 +32,16 @@ class Post(models.Model):
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name="posts")
     tag = models.ManyToManyField(Tag)
+    
+
+class Comment(models.Model):
+    user_name = models.CharField(max_length=50)
+    user_email = models.EmailField()
+    comment_text = models.TextField(max_length=300)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name="comments")
+
+
+# A comment should be realted to post
+# And since it's a one-to-many relation,
+# and one comment belongs to one post
+# but one post can have multiple comments

@@ -32,11 +32,19 @@
         </p>
     </main>
 
-    <div>
-        <form>
-            {{ comment_form }}
+    <section id="comment-form">
+        <h2>Let your comment</h2>
+        <form >
+            {% for field in comment_form %}
+                <div class="form-control">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+            
             <button>save comment</button>
         </form>
-    </div>
+    </section>
 
 {% endblock %}

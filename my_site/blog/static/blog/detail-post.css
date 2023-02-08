@@ -122,3 +122,39 @@ body {
     border-radius: 6px;
     border: 1px solid #ccc;
   }
+
+  .errorlist {
+    list-style: none;
+    margin: 0.5rem 0;
+    padding: 0;
+    color: #c70a0a;
+  }
+
+  .invalid label {
+    color: #c70a0a;
+  }
+
+  .invalid input,
+  .invalid textarea {
+    border-color: #c70a0a;
+    background-color: #f3dbdb;
+  }
+
+
+  #alert {
+    margin: 8rem auto 3rem auto;
+    border: 1px solid #c70a0a;
+    background-color: #f3dbdb;
+    padding: 1rem;
+    width: 90%;
+    max-width: 40rem;
+  }
+
+  #alert a {
+    text-decoration: none;
+    border: 1px solid #c70a0a;
+    background-color: #c70a0a;
+    color: #e7e7e7;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+  }

@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView
+from django.views import View
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from datetime import date
 
@@ -49,12 +52,42 @@ class PostsView(ListView):
 #        # we are querying for all the related tags
 
 
-class PostDetailView(DetailView):
-    template_name = "blog/post-detail.html"
-    model = Post
+class PostDetailView(View):
+    #template_name = "blog/post-detail.html"
+    #model = Post
+
+    #def get_context_data(self, **kwargs):
+    #    context = super().get_context_data(**kwargs)
+    #    context["post_tags"] = self.object.tag.all()
+    #    context["comment_form"] = CommentForm()
+    #    return context
+
+    def get(self, request, slug):
+        post = Post.objects.get(slug=slug)
+        context = {
+            "post": post,
+            "post_tags": post.tag.all(),
+            "comment_form": CommentForm()
+        }
+
+        return render(request, "blog/post-detail.html", context)
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["post_tags"] = self.object.tag.all()
-        context["comment_form"] = CommentForm()
-        return context
+    
+    def post(self, request, slug):
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+
+            return HttpResponseRedirect(reverse("post-detail-page", args=[slug]))
+        
+        context = {
+            "post": post,
+            "post_tags": post.tag.all(),
+            "comment_form": comment_form
+        }
+        
+        return render(request, "blog/post-detail.html", context)

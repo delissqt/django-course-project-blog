@@ -94,9 +94,33 @@ static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Static Files & User Uploads
 
+```
+|-------------------------------------------------------------------------------------------------|
+| Django does NOT serve static or uploaded files automatically                                    |
+|-------------------------------------------------------------------------------------------------|
+|`python manage.py runserver` is a development - only server which handles static files serving   |
+|-------------------------------------------------------------------------------------------------|
+             ||                                   ||                                  ||
+            _||_                                 _||_                                _||_
+            \  /                                 \  /                                \  /
+             \/                                   \/                                  \/
+|---------------------------|         |-------------------------|        |------------------------|
+| Configure Django to serve |         | Configure web server to |        | Use dedicated service/ |
+| such files (via urls.py   |         | serve static files AND  |        |  server for static and |
+|---------------------------|         |    Django app           |        |     uploaded files     |
+                                      |-------------------------|        |------------------------|
 
-| Django does **NOT** serve static or uploaded files automatically |
+|-----------------------------|       |-------------------------|        |-------------------------|
+| Okey for smaller sites, not |       | Same server and device  |        | Initial setup is more   |
+|   performance-optimized     |       | but separate processes, |        | complex but offers best |
+|        though               |       | better for performance  |        |      performance        |
+|-----------------------------|       |-------------------------|        |-------------------------|
+
+```
+
+|  |
 |------------------------------------------------------------------|
-| `python manage.py runserver` is a development - only server which handles static files serving |
-| Configure Django to serve such files (via urls.py) | Configure web server to serve static files AND Django app | Use dedicated service/server for static and uploaded files |
-| Okey for smaller sites, not performance-optimized though | Same server and device but separate processes, better for performance | Initial setup is more complex but offers best performance |
+|  |
+
+| ) ||    |  ||
+|    |    |    |

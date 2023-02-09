@@ -87,3 +87,16 @@ static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 * We will also need to choose a host and then deploy our application because it turns out
   that there will not just be one option for deploying a Django application.
   ultimately there will be multiple options. When you decide to use a certain host or a certain hosting provider, then you will always also need to dive into DIR docs
+
+
+
+  ---
+
+# Static Files & User Uploads
+
+
+| Django does **NOT** serve static or uploaded files automatically |
+|------------------------------------------------------------------|
+| `python manage.py runserver` is a development - only server which handles static files serving |
+| Configure Django to serve such files (via urls.py) | Configure web server to serve static files AND Django app | Use dedicated service/server for static and uploaded files |
+| Okey for smaller sites, not performance-optimized though | Same server and device but separate processes, better for performance | Initial setup is more complex but offers best performance |

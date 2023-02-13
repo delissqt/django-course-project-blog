@@ -117,3 +117,51 @@ static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 |-----------------------------|       |-------------------------|        |-------------------------|
 
 ```
+
+---
+
+# Configuration  settings.py file project for deployement
+
+```
+python manage.py collectstatic
+```
+
+This commando built into Django and this command will now go ahead collect all the static files.
+So all the predefined images and CSS and JavaScript files and so on which had finds in our project and it creates a static files folder because of this settings here.
+
+
+##  Enviroment variables
+
+In order create virtual enviromentes for deployment
+
+1. Installar django-environt `pipenv install django-environ`
+   
+2. Create file **.env** in the same directory that **settings.py** project file
+   
+   ```
+   /
+    -->  wsgi.py
+    -->  setting.py
+    -->  .env
+   ```
+
+3. Insite **.env** file add environment variables, i.e.
+    ```
+    SECRET_KEY=django-insecure-ysjw4aw1le6lqb(n3%q82dq7idter5-qho(=5)@d^nf9js0cy$
+    DEBUG=True
+    ```
+
+4. Insite **settings.py** add enviroment variables  i.e.
+
+    ```
+    import os
+    import environ
+
+    # INITIALICE ENVIRONMENT VARIABLES - CONFIGURATION FOR DEPLOY
+    env = environ.Env()
+    environ.Env.read_env()
+
+    SECRET_KEY = env('SECRET_KEY')
+    ```
+
+5. At one the files **.env** and  **settings.py** are configurated run the command `python manage.py collectstatic`

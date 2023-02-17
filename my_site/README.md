@@ -165,3 +165,29 @@ In order create virtual enviromentes for deployment
     ```
 
 5. At one the files **.env** and  **settings.py** are configurated run the command `python manage.py collectstatic`
+
+
+---
+
+# Tips for deployment
+
+## Populate from  pip freeze comman to requirements.txt
+
+`python -m pip freeze > requirements.txt`
+
+
+---
+
+# Special files for deploy
+
+`static-files.config`
+this file will be picked up by Elastic Beanstalk, in ths case, to then change its international Nginx configuration to make that server serve static files differentyly.
+In this files which you should name exactly like this.
+
+---
+
+# Serving Static files via S3
+
+S3 is a file storage service which is a file storage service, is already optimized for storing files ans which also can serve files.
+
+In the S3 console we can create a bucket, which is like a new folder.
